@@ -4,6 +4,10 @@
     "keywords": ["util", "functional", "server", "client", "browser"],
     "author": "Turcsán Ádám <turcsan.adam@legow.hu>",
     "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/adamturcsan/taskmgr.git"
+    }
     "dependencies": {
         "express":"4.15.0"
     },
