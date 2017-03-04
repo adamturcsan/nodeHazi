@@ -1,0 +1,13 @@
+{
+    "name": "NodeCourse",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "Turcsán Ádám <turcsan.adam@legow.hu>",
+    "contributors": [],
+    "dependencies": {
+        "express":"4.15.0"
+    },
+    "scripts":{
+        "start":"node index.js"
+    }
+}

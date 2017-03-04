@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+All rights reserved © 2017 Legow Hosting Kft.
+-->
+<html>
+    <head>
+        <title>Taskmanager - Show task</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/main.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <!--<div class="container">-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="list.html">Taskmanager</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse pull-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+            <!--</div>-->
+        </nav>
+
+        <div class="container" id="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Task - Task name</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h3>Description</h3> 
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <p>
+                        <a href="#" alt="Assign this task to me">Assign to me</a>
+                    </p>
+                    <form action="#">
+                        <label for="state-select">Change state to</label> <select name="task_state" id="state-select">
+                            <option value="0">Assigned</option>
+                            <option value="1">In progress</option>
+                            <option value="2">Closed</option>
+                        </select> <input type="submit" class="btn btn-success" value="Change" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
