@@ -1,0 +1,39 @@
+<%- include('../header-loggedin') %>
+<div class="container" id="content">
+    <div class="col-sm-12">
+        <div id="task-list">
+            <a class="btn btn-success pull-right" id="add-new" href="tasks/add">Add new</a>
+            <h2>Tasks</h2>
+            <table id="task-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Assignee</th>
+                        <th>Due date</th>
+                        <th>State</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(key in tasks) { var task = tasks[key]; %>
+                    <tr>
+                        <td><%= task.name %></td>
+                        <td><%= task.assignee %></td>
+                        <td><%= task.dueDate %></td>
+                        <td><%= task.state %></td>
+                        <td class="pull-right"><a href="tasks/details/<%= task.id %>" class="btn btn-sm btn-primary">Show</a> <a href="tasks/del/<%= task.id %>" class="btn btn-sm btn-danger">Delete</a></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/static/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#task-table').DataTable({
+        });
+    });
+</script>
+<%- include('../footer.ejs') %>
