@@ -4,6 +4,9 @@
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {
+        res.tpl.user = {
+            id: 1
+        };
         return next();
     };
 }

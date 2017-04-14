@@ -38,7 +38,7 @@ module.exports = function (app) {
             loginMW(objectRepository),
             checkUserDataMW(objectRepository),
             function (req, res, next) {
-                return res.redirect('/');
+                return res.redirect('/tasks');
             }
     );
 };
