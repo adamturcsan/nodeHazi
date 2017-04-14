@@ -1,3 +1,4 @@
+var dataSeed = require('./models/seed/bundle');
 var express = require('express');
 var app = express();
 
@@ -23,5 +24,6 @@ require('./routes/user')(app);
 app.use('/static',express.static('static'));
 
 var server = app.listen(3000, function () {
+    dataSeed();
     console.log('Listening on port 3000');
 });
