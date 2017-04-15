@@ -6,25 +6,34 @@ var hasData = require('./generic').moreThanZero;
 var seed = function() {
     
     var insertData = function() {
-        var todoId = mongoose.Types.ObjectId();
-        var assignedId = mongoose.Types.ObjectId();
-        var inProgressId = mongoose.Types.ObjectId();
-        var doneId = mongoose.Types.ObjectId();
+        var todoRef = {
+            $ref: 'State',
+            $id: mongoose.Types.ObjectId()
+        }, assignedRef = {
+            $ref: 'State',
+            $id: mongoose.Types.ObjectId()
+        }, inProgressRef = {
+            $ref: 'State',
+            $id: mongoose.Types.ObjectId()
+        }, doneRef = {
+            $ref: 'State',
+            $id: mongoose.Types.ObjectId()
+        };
         
         return stateModel.collection.insert([{
-            _id: todoId,
+            _id: todoRef.$id,
             name: 'Todo',
-            next: [assignedId]
+            next: [assignedRef]
         },{
-            _id: assignedId,
+            _id: assignedRef.$id,
             name: 'Assigned',
-            next: [todoId,inProgressId]
+            next: [todoRef,inProgressRef]
         },{
-            _id: inProgressId,
+            _id: inProgressRef.$id,
             name: 'In progress',
-            next: [todoId,assignedId,doneId]
+            next: [todoRef,assignedRef,doneRef]
         },{
-            _id: doneId,
+            _id: doneRef.$id,
             name: 'Done'
         }]);
     };
