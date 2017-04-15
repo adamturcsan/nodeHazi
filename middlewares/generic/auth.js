@@ -4,8 +4,11 @@
  */
 module.exports = function (objectRepository) {
     return function (req, res, next) {
+        if(typeof req.session.userid === 'undefined') {
+            return res.redirect('/login');
+        }
         res.tpl.user = {
-            id: 1
+            id: req.session
         };
         return next();
     };

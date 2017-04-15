@@ -1,5 +1,9 @@
+var userModel = require('../models/user');
+
 module.exports = function (app) {
-    var objectRepository = {};
+    var objectRepository = {
+        userModel: userModel
+    };
 
     var renderMW = require('../middlewares/generic/render');
 
@@ -34,11 +38,9 @@ module.exports = function (app) {
     );
 
     app.post('/login',
-            inverseAuthMW(objectRepository),
-            loginMW(objectRepository),
-            checkUserDataMW(objectRepository),
-            function (req, res, next) {
-                return res.redirect('/tasks');
-            }
+        inverseAuthMW(objectRepository),
+        loginMW(objectRepository),
+        checkUserDataMW(objectRepository),
+        renderMW(objectRepository, 'login')
     );
 };
