@@ -9,6 +9,13 @@
                 Registration
             </div>
         </div>
+        <% if(error.length > 0) { %>
+        <div class="alert alert-danger">
+            <% for (key in error) { var item = error[key]; %>
+            <p class="danger"><%= item %></p>
+            <% } %>
+        </div>
+        <% } %>
         <div class="form-group">
             <form method="post" action="/user/registration"> <!-- GET, mert jelenleg csak a get methodon figyelek -->
                 <div class="input-group col-xs-12">
@@ -33,7 +40,7 @@
                     <label for="confirm-pw-input">
                         Confirm password: 
                     </label>
-                    <input class="form-control" type="password" name="confirm-password" id="confirm-pw-input" />
+                    <input class="form-control" type="password" name="confirmPassword" id="confirm-pw-input" />
                 </div>
                 <div class="row">
                     <div class="col-xs-12">

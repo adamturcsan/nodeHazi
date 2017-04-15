@@ -20,9 +20,7 @@ module.exports = function (app) {
     app.post('/user/registration',
         checkUserDataMW(objectRepository),
         saveUserMW(objectRepository),
-        function (req, res, next) {
-            return res.redirect('/login');
-        }
+        renderMW(objectRepository, 'registration')
     );
 
     app.get('/logout',
