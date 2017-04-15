@@ -40,7 +40,6 @@ module.exports = function (app) {
     app.post('/login',
         inverseAuthMW(objectRepository),
         loginMW(objectRepository),
-        checkUserDataMW(objectRepository),
         renderMW(objectRepository, 'login')
     );
 };

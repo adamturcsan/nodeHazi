@@ -6,25 +6,29 @@
                 </div>
             </div>
             <div class="row">
-                <form action="/tasks">
+                <form action="/tasks/add" method='post'>
                     <div class="col-md-6">
                         <div class="col-sm-12 input-group">
                             <label for="task-name">Task name</label>
-                            <input type="text" name="task_name" class="form-control" id="task-name" />
+                            <input type="text" name="name" class="form-control" id="task-name" />
                         </div>
                         <div class="col-sm-12 input-group">
                             <label for="task-description">Task description</label>
-                            <textarea name="task_desscription" class="form-control" id="task-description"></textarea>
+                            <textarea name="description" class="form-control" id="task-description"></textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="col-sm-12 input-group">
                             <label for="task-due">Due date</label>
-                            <input type="date" name="task_due" class="form-control" id="task-due" />
+                            <input type="date" name="due" class="form-control" id="task-due" />
                         </div>
                         <div class="col-sm-12 input-group">
                             <label for="task-dependencies">Dependencies</label>
-                            <input type="text" name="task_dependencies" class="form-control" id="task-dependencies" />
+                            <select multiple="multiple" name="dependencies" class="form-control" id="task-dependencies">
+                                <% tasks.forEach(function(task){ %>
+                                <option value="<%=task._id%>"><%= task.name %></option>
+                                <% }); %>
+                            </select>
                         </div>
                     </div>
                     <div class="row">

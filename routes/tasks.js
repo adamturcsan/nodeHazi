@@ -1,8 +1,10 @@
 var taskModel = require('../models/task');
+var stateModel = require('../models/state');
 
 module.exports = function (app) {
     var objectRepository = {
-        taskModel: taskModel
+        taskModel: taskModel,
+        stateModel: stateModel
     };
 
     var authMW = require('../middlewares/generic/auth');
@@ -13,9 +15,12 @@ module.exports = function (app) {
     var checkTaskDataMW = require('../middlewares/task/checkTaskData');
     var saveTaskMW = require('../middlewares/task/saveTask');
     var deleteTaskMW = require('../middlewares/task/deleteTask');
-
+    var assignTaskMW = require('../middlewares/task/assignTask');
+    
     app.post('/tasks/assign/:id',
         authMW(objectRepository),
+        getTaskMW(objectRepository),
+        assignTaskMW(objectRepository),
         function (req,res,next) {
             return res.redirect('/tasks/details/'+req.params.id);
         }
@@ -37,6 +42,7 @@ module.exports = function (app) {
 
     app.get('/tasks/add',
         authMW(objectRepository),
+        getTaskListMW(objectRepository),
         renderMW(objectRepository, 'tasks/add')
     );
 

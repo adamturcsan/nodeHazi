@@ -10,6 +10,7 @@ module.exports = function (objectRepository) {
         //not enough parameter
         if ((typeof req.body === 'undefined') || (typeof req.body.email === 'undefined') ||
                 (typeof req.body.password === 'undefined')) {
+            res.tpl.error.push('Please, provide your credentials!');
             return next();
         }
 

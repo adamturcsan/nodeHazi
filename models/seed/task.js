@@ -9,7 +9,8 @@ var seed = function() {
         return taskModel.collection.insert({
             name: 'Test Task',
             description: 'First task for testing purposes',
-            dueDate: dueDate
+            dueDate: dueDate,
+            next: []
         });
     };
     
