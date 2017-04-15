@@ -1,4 +1,5 @@
 var requiredOption = require('../common').requireOption;
+var moment = require('moment');
 /* 
  * - Checks if every task property is valid
  * - Not valid: err
@@ -6,6 +7,7 @@ var requiredOption = require('../common').requireOption;
 
 module.exports = function (objectRepository) {
     var stateModel = requiredOption(objectRepository, 'stateModel');
+    var taskModel = requiredOption(objectRepository, 'taskModel');
     
     return function (req, res, next) {
         if(typeof req.body === 'undefined') {
@@ -17,6 +19,17 @@ module.exports = function (objectRepository) {
         }
         
         if(typeof req.params === 'undefined' || typeof req.params.id === 'undefined') {// Create new
+            if(req.body.name === '' || req.body.description === '' || req.body.due === '') {
+                res.tpl.error.push('Please fill all fields');
+                return next();
+            }
+            var task = new taskModel({
+                name: req.body.name,
+                description: req.body.description,
+                dueDate: moment(req.body.due),
+                dependencies: req.body.dependencies
+            });
+            res.tpl.task = task;
             return next();
         } else if(typeof req.body.task_state !== 'undefined') { //Change state
             console.log('Change task state');

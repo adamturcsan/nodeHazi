@@ -50,9 +50,8 @@ module.exports = function (app) {
         authMW(objectRepository),
         checkTaskDataMW(objectRepository),
         saveTaskMW(objectRepository),
-        function (req, res, next) {
-            return res.redirect('/tasks');
-        }
+        getTaskListMW(objectRepository),
+        renderMW(objectRepository, 'tasks/add')
     );
 
     app.get('/tasks/del/:id',

@@ -6,13 +6,7 @@
                 Taskmanager
             </div>
         </div>
-        <% if(error.length > 0) { %>
-        <div class="alert alert-danger">
-            <% for (key in error) { var item = error[key]; %>
-            <p class="danger"><%= item %></p>
-            <% } %>
-        </div>
-        <% } %>
+        <%- include('errors', {error: error}) %>
         <div class="form-group">
             <form method="post" action="/login"> <!-- GET, mert jelenleg csak a get methodon figyelek -->
                 <div class="input-group col-xs-12">

@@ -1,0 +1,9 @@
+<% if(error.length > 0) { %>
+<div class="alert alert-danger">
+    <% for (key in error) { var item = error[key]; %>
+    <p class="danger"><%= item %></p>
+    <% } %>
+</div>
+<% } %>
+
+
