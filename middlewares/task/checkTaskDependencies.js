@@ -8,11 +8,9 @@ module.exports = function (objectRepository) {
         if(typeof task === 'undefined') {
             return next();
         }
-        if(task.dependencies.length === 0) {
-            console.log('There are no dependencies');
+        if(task.dependencies.length === 0) { // There are no dependencies
             return next();
         }
-        console.log('Check deps',task);
         taskModel.populate(task, {path: 'dependencies', select: 'name _state', populate: {path: '_state', select: 'name'}},(err, result) => {
             if(err) {
                 console.log('Task population failed. '+err);
@@ -21,7 +19,6 @@ module.exports = function (objectRepository) {
             var missingDependency = false;
             task.dependencies.forEach((depTask) => {
                 if(depTask._state.name !== 'Done') {
-                    console.log('shit task', task);
                     res.tpl.error.push('Dependent task ('+depTask.name+') is not done!');
                     missingDependency = true;
                 }

@@ -32,13 +32,11 @@ module.exports = function (objectRepository) {
             res.tpl.task = task;
             return next();
         } else if(typeof req.body.task_state !== 'undefined') { //Change state
-            console.log('Change task state');
             stateModel.findOne({_id: req.body.task_state}, function (err, result){
                 if(err) {
                     res.tpl.error.push('Invalid state was provided');
                     return res.redirect('/tasks/details/'+req.params.id);
                 }
-                console.log(result);
                 return next();
             });
         }

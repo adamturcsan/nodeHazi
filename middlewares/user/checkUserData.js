@@ -17,12 +17,10 @@ module.exports = function (objectRepository) {
             console.log(err, result);
             if (result) {
                 res.tpl.error.push('Email address is already in use');
-                console.log('call next');
                 return next();
             }
             if (req.body.password !== req.body.confirmPassword) {
                 res.tpl.error.push('Passwords don\'t match');
-                console.log(req.body.password, req.body.confirmPassword);
                 return next();
             }
 

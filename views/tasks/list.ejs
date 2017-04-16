@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(key in tasks) { var task = tasks[key]; console.log(task)%>
+                    <% for(key in tasks) { var task = tasks[key]; %>
                     <tr>
                         <td><%= task.name %></td>
                         <td><%= typeof task._assignedTo !== 'undefined' ? task._assignedTo.name : '' %></td>
