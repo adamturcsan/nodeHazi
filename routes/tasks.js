@@ -1,8 +1,10 @@
 var taskModel = require('../models/task');
+var stateModel = require('../models/state');
 
 module.exports = function (app) {
     var objectRepository = {
-        taskModel: taskModel
+        taskModel: taskModel,
+        stateModel: stateModel
     };
 
     var authMW = require('../middlewares/generic/auth');
@@ -11,11 +13,15 @@ module.exports = function (app) {
     var getTaskMW = require('../middlewares/task/getTask');
     var getTaskListMW = require('../middlewares/task/getTaskList');
     var checkTaskDataMW = require('../middlewares/task/checkTaskData');
+    var checkTaskDependenciesMW = require('../middlewares/task/checkTaskDependencies');
     var saveTaskMW = require('../middlewares/task/saveTask');
     var deleteTaskMW = require('../middlewares/task/deleteTask');
-
+    var assignTaskMW = require('../middlewares/task/assignTask');
+    
     app.post('/tasks/assign/:id',
         authMW(objectRepository),
+        getTaskMW(objectRepository),
+        assignTaskMW(objectRepository),
         function (req,res,next) {
             return res.redirect('/tasks/details/'+req.params.id);
         }
@@ -31,12 +37,14 @@ module.exports = function (app) {
         authMW(objectRepository),
         getTaskMW(objectRepository),
         checkTaskDataMW(objectRepository),
+        checkTaskDependenciesMW(objectRepository),
         saveTaskMW(objectRepository),
         renderMW(objectRepository, 'tasks/show')
     );
 
     app.get('/tasks/add',
         authMW(objectRepository),
+        getTaskListMW(objectRepository),
         renderMW(objectRepository, 'tasks/add')
     );
 
@@ -44,9 +52,8 @@ module.exports = function (app) {
         authMW(objectRepository),
         checkTaskDataMW(objectRepository),
         saveTaskMW(objectRepository),
-        function (req, res, next) {
-            return res.redirect('/tasks');
-        }
+        getTaskListMW(objectRepository),
+        renderMW(objectRepository, 'tasks/add')
     );
 
     app.get('/tasks/del/:id',

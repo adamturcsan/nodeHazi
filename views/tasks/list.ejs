@@ -18,10 +18,10 @@
                     <% for(key in tasks) { var task = tasks[key]; %>
                     <tr>
                         <td><%= task.name %></td>
-                        <td><%= task.assignee %></td>
+                        <td><%= typeof task._assignedTo !== 'undefined' ? task._assignedTo.name : '' %></td>
                         <td><%= task.dueDate %></td>
-                        <td><%= task.state %></td>
-                        <td class="pull-right"><a href="tasks/details/<%= task.id %>" class="btn btn-sm btn-primary">Show</a> <a href="tasks/del/<%= task.id %>" class="btn btn-sm btn-danger">Delete</a></td>
+                        <td><%= typeof task._state === 'undefined' ? '' : task._state.name %></td>
+                        <td class="pull-right"><a href="tasks/details/<%= task.id %>" class="btn btn-sm btn-primary">Show</a> <a href="tasks/del/<%= task.id %>" class="btn btn-sm btn-danger" onClick="confirm('Are yue sure?')">Delete</a></td>
                     </tr>
                     <% } %>
                 </tbody>

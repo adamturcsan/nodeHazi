@@ -6,10 +6,10 @@ var hasData = require('./generic').moreThanZero;
 var seed = function() {
     
     var insertData = function() {
-        var todoId = mongoose.Types.ObjectId();
-        var assignedId = mongoose.Types.ObjectId();
-        var inProgressId = mongoose.Types.ObjectId();
-        var doneId = mongoose.Types.ObjectId();
+        var todoId =  mongoose.Types.ObjectId(),
+        assignedId = mongoose.Types.ObjectId(),
+        inProgressId =  mongoose.Types.ObjectId(),
+        doneId = mongoose.Types.ObjectId();
         
         return stateModel.collection.insert([{
             _id: todoId,
@@ -25,7 +25,8 @@ var seed = function() {
             next: [todoId,assignedId,doneId]
         },{
             _id: doneId,
-            name: 'Done'
+            name: 'Done',
+            next: []
         }]);
     };
     

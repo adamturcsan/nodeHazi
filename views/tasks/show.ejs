@@ -5,15 +5,22 @@
             <h2>Task - Task name</h2>
         </div>
     </div>
+    <%- include('../errors', {error: error}) %>
     <div class="row">
         <div class="col-sm-12 col-md-6">
             <h3><%= task.name %></h3> 
             <p>
                 <%= task.description %>
             </p>
+            <h4>Dependencies</h4>
+            <ul>
+                <% task.dependencies.forEach(function(dep){ %>
+                <li><%=dep.name%></li>
+                <% }); %>
+            </ul>
         </div>
         <div class="col-sm-12 col-md-6">
-            <% if(task.assignedTo != user.id) { %>
+            <% if(typeof task._assignedTo === 'undefined' || task._assignedTo._id != user.id.userid) { %>
             <p>
             <form action="/tasks/assign/<%= task.id %>" method="post">
                 <input type="submit" class="btn btn-info" value="Assign to me" />
@@ -22,9 +29,11 @@
             <% } %>
             <form action="/tasks/details/<%= task.id %>" method='post'>
                 <label for="state-select">Change state to</label> <select name="task_state" id="state-select">
-                    <option value="0">Assigned</option>
-                    <option value="1">In progress</option>
-                    <option value="2">Closed</option>
+                    <% if(task._state.next.length > 0) { %>
+                        <% task._state.next.forEach(function(state) { %>
+                            <option value="<%=state._id%>"><%=state.name%></option>
+                        <% }); %>
+                    <% } %>
                 </select> <input type="submit" class="btn btn-success" value="Change" />
             </form>
         </div>

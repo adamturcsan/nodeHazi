@@ -4,8 +4,8 @@ var stateSeed = require('./state');
 
 var bundleSeed = function () {
     stateSeed();
-    userSeed();
-    taskSeed();
+//    userSeed();
+//    taskSeed();
 };
 
 module.exports = bundleSeed;
