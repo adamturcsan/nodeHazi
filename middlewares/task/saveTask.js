@@ -9,11 +9,15 @@ module.exports = function (objectRepository) {
     var stateModel = requiredOption(objectRepository, 'stateModel');
     
     return function (req, res, next) {
+        var taskId = req.params.id;
         var task = res.tpl.task;
         if(typeof task === 'undefined') {
             return next();
         }
-        if(typeof req.body.task_state !== 'undefined') { // Change state
+        if(typeof res.tpl.missingDependency !== 'undefined' && res.tpl.missingDependency) {
+            return next();
+        }
+        if(typeof req.body.task_state !== 'undefined' && typeof taskId !== 'undefined') { // Change state
             task._state = req.body.task_state;
             task.save((err, result)=>{
                 if(err) {
@@ -27,7 +31,7 @@ module.exports = function (objectRepository) {
                         console.log('Task population failed: '+err);
                     }
                     res.tpl.task = task;
-                    return next();
+                    return res.redirect('/tasks/details/'+taskId);
                 });
             });
         } else {

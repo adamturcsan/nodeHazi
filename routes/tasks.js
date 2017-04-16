@@ -13,6 +13,7 @@ module.exports = function (app) {
     var getTaskMW = require('../middlewares/task/getTask');
     var getTaskListMW = require('../middlewares/task/getTaskList');
     var checkTaskDataMW = require('../middlewares/task/checkTaskData');
+    var checkTaskDependenciesMW = require('../middlewares/task/checkTaskDependencies');
     var saveTaskMW = require('../middlewares/task/saveTask');
     var deleteTaskMW = require('../middlewares/task/deleteTask');
     var assignTaskMW = require('../middlewares/task/assignTask');
@@ -36,6 +37,7 @@ module.exports = function (app) {
         authMW(objectRepository),
         getTaskMW(objectRepository),
         checkTaskDataMW(objectRepository),
+        checkTaskDependenciesMW(objectRepository),
         saveTaskMW(objectRepository),
         renderMW(objectRepository, 'tasks/show')
     );
