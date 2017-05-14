@@ -12,7 +12,7 @@ module.exports = function (objectRepository) {
     return function (req, res, next) {
         if(typeof req.body === 'undefined') {
             res.tpl.error.push('Data was not provided');
-            if(typeof req.params.id !== 'undefined') {
+            if(typeof req.params !== 'undefined' && typeof req.params.id !== 'undefined') {
                 return res.redirect('/tasks/details/'+req.params.id);
             }
             return res.redirect('/tasks');
@@ -40,5 +40,6 @@ module.exports = function (objectRepository) {
                 return next();
             });
         }
+        return res.redirect('/tasks');
     };
 };

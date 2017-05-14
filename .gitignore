@@ -1,2 +1,4 @@
 /node_modules/
 /nbproject/
+/coverage/
+/.nyc_output/
