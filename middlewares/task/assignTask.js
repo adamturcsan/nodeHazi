@@ -1,8 +1,4 @@
-var requireOption = require('../common').requireOption;
-
 module.exports = function (objectRepository) {
-    var taskModel = requireOption(objectRepository, 'taskModel');
-
     return function (req, res, next) {
         var userid= res.tpl.user.id.userid;
         var task = res.tpl.task;
@@ -13,8 +9,6 @@ module.exports = function (objectRepository) {
                 console.log(err);
             }
             return next();
-        })
-    }
-}
-
-
+        });
+    };
+};
